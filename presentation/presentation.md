@@ -25,7 +25,7 @@ using a Poisson distribution for counts and successes.
 
 ***
 
-![plot of chunk unnamed-chunk-1](presentation-figure/unnamed-chunk-1.png) 
+![plot of chunk unnamed-chunk-1](presentation-figure/unnamed-chunk-1-1.png) 
 
 Statistical Power
 ========================================================

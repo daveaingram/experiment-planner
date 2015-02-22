@@ -26,7 +26,7 @@ using a Poisson distribution for counts and successes.
 ***
 
 ```{r, echo=FALSE}
-source("../common.R")
+source("../app/common.R")
 library(reshape)
 library(ggplot2)
 library(grid)
