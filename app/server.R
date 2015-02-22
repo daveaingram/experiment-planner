@@ -21,7 +21,7 @@ shinyServer(function(input, output) {
     input$goButton
     data <- isolate(simulateData(choices(), input$days, 
                                  input$count, input$rate, 
-                                 input$boost, input$adjustamount))
+                                 input$boost, input$effectsize))
     data
   })
   
@@ -109,13 +109,51 @@ shinyServer(function(input, output) {
           )
       }
   })
+  
+  output$power <- renderUI({
+      pwr <- pwr.t.test(d = abs(input$effectsize) / 100, 
+                        sig.level = ifelse(is.null(input$alpha), 0.05, as.numeric(input$alpha)), 
+                        power = 1 - ifelse(is.null(input$beta), 0.2, as.numeric(input$beta)), 
+                        type = c("two.sample"))
+      list(
+          h3("Statistical Power"),
+          p(
+              "Using a sufficient sample size is essential when running an 
+              experiment. Given a minimum effect of ",
+              paste(abs(input$effectsize), '%,', sep=""),
+              'a significance level of',
+              paste(100 - as.numeric(input$alpha) * 100, 
+                    '%, (alpha = ', as.numeric(input$alpha), ')', sep=""),
+              'and a statistical power of ',
+              paste(100 - as.numeric(input$beta) * 100, 
+                    '%, (alpha = ', as.numeric(input$beta), ')', sep=""),
+              ', you will need ',
+              strong(round(pwr$n)), 'observations per experiemental group.'
+          ),
+          hr(),
+          textInput('alpha',
+                       'Set an alpha level',
+                       value = ifelse(!is.null(input$alpha), input$alpha, '0.05')),
+          helpText('the significance or alpha (α) level is the probability of 
+                   rejecting the null hypothesis given that it is true.'),
+          textInput('beta',
+                    'Set a beta level',
+                    value = ifelse(!is.null(input$beta), input$beta, '0.2')),
+          helpText('The power or sensitivity of a statistical test is the 
+                   probability that it correctly rejects the null hypothesis 
+                   (H0) when it is false. It can be equivalently thought of 
+                   as the probability of correctly accepting the alternative 
+                   hypothesis (H1) when it is true - that is, the ability of a 
+                   test to detect an effect, if the effect actually exists. ')
+      )
+  })
 })
 
 #########################################################
 ####  Helper Functions                               ####
 #########################################################
 
-simulateData <- function(choices, days, count, rate, boost, adjust.amount) {
+simulateData <- function(choices, days, count, rate, boost, effectsize) {
     # Determine Dates to be used for simulation
     today <- Sys.Date()
     startDate <- today - (days - 1)
@@ -137,7 +175,7 @@ simulateData <- function(choices, days, count, rate, boost, adjust.amount) {
     
     # The choice that's selected for adjustment can now get a boost
     index <- grep(boost, choices)
-    successes[,index] <- successes[,index] + successes[,index] * adjust.amount / 100
+    successes[,index] <- successes[,index] + successes[,index] * effectsize / 100
 
     rates <- round(successes / counts * 100, 2)
     

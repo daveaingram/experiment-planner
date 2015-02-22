@@ -39,11 +39,12 @@ shinyUI(fluidPage(
       h4("Experiment adjustments"),
       uiOutput("controlchoice"),
       uiOutput("adjustchoice"),
-      sliderInput("adjustamount",
-                  "Relative Percentage to adjust",
+      sliderInput("effectsize",
+                  "Experimental Effect (%)",
                   min = -100,
                   max = 100,
                   value = 10),
+      helpText("How much of a simulated effect do you want for the above choice?"),
       actionButton("goButton", "Run Simulation!")
     ),
 
@@ -55,8 +56,8 @@ shinyUI(fluidPage(
                      plotOutput("simulation"),
                      tableOutput("simulationSummary")
             ), 
-            tabPanel("Calculations", 
-                     verbatimTextOutput("summary")
+            tabPanel("Calculations",
+                     uiOutput("power")
             ) 
         )
     )
