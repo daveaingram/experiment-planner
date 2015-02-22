@@ -1,0 +1,48 @@
+Experiment Planner
+========================================================
+author: Dave Ingram
+date: February 22nd, 2015
+
+Rationalle
+========================================================
+
+Designing a proper experiment has a number of challenges, and 
+online experiments (often called A/B Tests) are frequently
+run by practioners without a strong statistical background.
+
+**Experiment Planner** is an application which helps these
+practioners to understand the randomness of their data through
+simulation and statistical power calculations
+
+Simulation
+========================================================
+
+```{r, echo=FALSE}
+source("../common.R")
+library(reshape)
+library(ggplot2)
+library(grid)
+df <- simulateData(c("Option A", "Option B"), 14, 1000, 3, "Option B", 10)
+for(i in 2:nrow(df)) {
+    for(j in 2:ncol(df)) {
+        df[i,j] <- mean(df[1:i,j])
+    }
+}
+df <- melt(df, id="date")
+qplot(date, value, data=df, color=variable, geom="line",
+      main = "Simulated Cumulative Average Conversion Rate Per Day",
+      xlab = "", ylab="Conversion Rate (%)") + 
+      theme(axis.title.x=element_text(vjust=-2)) +
+      theme(axis.title.y=element_text(angle=90, vjust=2)) +
+      theme(plot.title=element_text(size=15, vjust=3)) +
+      theme(plot.margin = unit(c(1,1,1,1), "cm"))
+
+
+```
+
+Slide With Plot
+========================================================
+
+```{r, echo=FALSE}
+plot(cars)
+```
