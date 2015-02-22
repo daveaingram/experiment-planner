@@ -22,7 +22,7 @@ shinyUI(fluidPage(
       helpText("Enter a comma separated list of choices"),
       sliderInput("days",
                   "Number of days:",
-                  min = 1,
+                  min = 2,
                   max = 50,
                   value = 14),
       sliderInput("count",
