@@ -17,9 +17,28 @@ simulation and statistical power calculations
 Simulation
 ========================================================
 
+The starting point of the application is an experiment simulator. It contains
+a variety of controls to tweak the settings and then simulates an experiment
+using a Poisson distribution for counts and successes. 
+
+***
+
 ![plot of chunk unnamed-chunk-1](presentation-figure/unnamed-chunk-1.png) 
 
-Slide With Plot
+Statistical Power
 ========================================================
 
-![plot of chunk unnamed-chunk-2](presentation-figure/unnamed-chunk-2.png) 
+Calculating Statistical Power is an essential step in planning good experiments.
+The second tab in this application allows you to tweak the settings of alpha
+and beta parameters and determine the minimum number of trials that will be 
+necessary in order to reach a particular statistical power.
+
+Summary
+========================================================
+
+The advantages of using this application include:
+
+- Increased understanding of Inferential Statistics
+- Quick calculator for Statistical Power
+
+Please enjoy!
