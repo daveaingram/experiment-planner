@@ -2,6 +2,8 @@ Experiment Planner
 ========================================================
 author: Dave Ingram
 date: February 22nd, 2015
+transition: rotate
+font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif
 
 Rationalle
 ========================================================
