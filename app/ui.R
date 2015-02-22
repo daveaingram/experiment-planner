@@ -58,7 +58,58 @@ shinyUI(fluidPage(
             ), 
             tabPanel("Calculations",
                      uiOutput("power")
-            ) 
+            ),
+            tabPanel("Documentation",
+                     h3("Simulation"),
+                     p("To get started with Experiment Planner, you can simply
+                       click on 'Run Simulation' at the bottom of the left
+                       panel and the first simulation will be run. There are
+                       many settings which can also be tweaked, which are 
+                       described here"),
+                     h4("Names of Choices"),
+                     p("Here you can name the variations that will be a part
+                       of your experiment. You can enter a comma separated list,
+                       and the simulation will adjust to have the correct number
+                       of variations with the correct names"),
+                     h4("Number of Days"),
+                     p("Selecting a number of days for the simulation to run
+                       will adjust both the simulation and the resulting graph.
+                       It will also effect the calculation of p values since
+                       there will be more or less values in the corresponding
+                       t test."),
+                     h4("Total Trials Per Day"),
+                     p("Average number of trials to be simulated in a single 
+                       day."),
+                     h4("Average Success Rate"),
+                     p("What percentage of variations should be set as a 'success'?
+                       You will have the opportunity to adjust one variation up
+                       or down to see how that effects the resulting experiment."),
+                     h4("Select Control"),
+                     p("When calculating the p-values, which group should be 
+                       considered the control group?"),
+                     h4("Experiment Group to Boost"),
+                     p("The Experimental Effect control will adjust this group
+                       by that percentage. This allows for the simulation to 
+                       become more or less likely to find a signicant winner."),
+                     h4("Experimental Effect"),
+                     p("This will be the relative percentage of successes that
+                       are altered by in the group above. This means that if
+                       the simulation initially yields 100 successes for a day,
+                       and the effect is set to +10%, the result will be 110
+                       successes for that day"),
+                     h3("Calculations"),
+                     p("On this tab, you will be able to see the statistical 
+                       power calculation that results from the parameters on 
+                       this page as well as the experimental effect in the 
+                       left hand toolbar"),
+                     h4("Alpha level"),
+                     p("This allows you to set the statistical significance. It
+                       defaults to 0.05 which is the same as a 95% statistical
+                       confidence."),
+                     h4("Beta level"),
+                     p("Statistical Power is equal to 1 - beta, so if you want
+                       a statistical power of 80%, set beta to 0.2")
+                )
         )
     )
   )

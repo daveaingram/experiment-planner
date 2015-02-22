@@ -10,7 +10,8 @@ library(ggplot2)
 library(reshape)
 library(stringr)
 library(grid)
-source("../common.R")
+library(pwr)
+source("./common.R")
 
 shinyServer(function(input, output) {
   choices <- reactive({
